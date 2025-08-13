@@ -1,12 +1,26 @@
-# React + Vite
+B-B-B - Budget Better Buddy
+A React-based budgeting app with frontend and backend separation.
+Setup
+Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Navigate to frontend/.
+Run npm install to install dependencies.
+Ensure public/money-background.jpg is present (download from Unsplash).
+Start with npm run dev and visit http://localhost:5173/login.
 
-Currently, two official plugins are available:
+Backend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Navigate to backend/.
+Run npm init -y to create package.json (to be customized).
+Implement server logic in src/server.js, routes in src/routes/, and models in src/models/.
+Use .env for environment variables (e.g., port, database URI).
 
-## Expanding the ESLint configuration
+Collaboration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Pull changes with git pull.
+Push updates with git add ., git commit -m "message", and git push.
+
+Notes
+
+Frontend placeholders await backend API integration (e.g., authentication, AI budgeting).
+Current date: August 14, 2025.
