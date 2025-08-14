@@ -5,7 +5,8 @@ const controller = require('../controller/user.controller')
 
 /* GET users listing. */
 router.get('/:email', controller.getUserByEmail);
-router.post('/',controller.createUser);
+router.post('/login',controller.authenticateUser);
+router.post('/register',controller.createUser);
 
 
 
