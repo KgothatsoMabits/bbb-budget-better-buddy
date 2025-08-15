@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./database/config");
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const goalsRouter = require('./routes/goals')
 
 //Load Environment Variables
 if (process.env.NODE_ENV !== "production") {
@@ -36,5 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/goals',goalsRouter);
+
 
 module.exports = app;

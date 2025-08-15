@@ -59,7 +59,7 @@ exports.createUser = async (req, res) => {
 
     return res.status(201).json({message:"User Registered",data:payLoad});
   } catch (error) {
-    res.status(error.status).json({ error: error.message });
+    res.status(500).json({ error: "An internal server error occurred." });
   }
 };
 
