@@ -1,7 +1,6 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { Box, TextField, Button, Typography, Container } from '@mui/material';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Box, TextField, Button, Typography, Container, Modal, Fade } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/system';
 
@@ -28,18 +27,27 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   },
 }));
 
-function Login() {
+const StyledModal = styled(Modal)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setIsAuthenticated } = useContext(AuthContext);
+  const [name, setName] = useState('');
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (email && password) {
-      setIsAuthenticated(true);
+    // Mock signup logic - replace with API call in backend
+    setOpen(true);
+    setTimeout(() => {
+      setOpen(false);
       navigate('/');
-    }
+    }, 3000); // Redirect to dashboard after 3 seconds
   };
 
   return (
@@ -59,32 +67,22 @@ function Login() {
         }}
       >
         <motion.div
-          animate={{
-            scale: [1, 1.05, 1],
-            rotate: [0, 2, -2, 0],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
           <Typography
             variant="h3"
             color="white"
             gutterBottom
-            sx={{
-              fontWeight: 'bold',
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-              marginBottom: '40px',
-            }}
+            sx={{ fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', marginBottom: '40px' }}
           >
-            Budget Better Buddy 
+            B-B-B Sign Up
           </Typography>
         </motion.div>
         <Box
           component="form"
-          onSubmit={handleLogin}
+          onSubmit={handleSubmit}
           sx={{
             width: '100%',
             maxWidth: '400px',
@@ -97,6 +95,23 @@ function Login() {
           }}
         >
           <TextField
+            label="Name"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                transition: 'all 0.3s ease-in-out',
+                borderRadius: '8px',
+                '& .MuiOutlinedInput-input': { color: '#333' },
+                '& .MuiInputLabel-root': { color: '#444' },
+              },
+              '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255, 255, 255, 0.3)' },
+            }}
+          />
+          <TextField
             label="Email"
             variant="outlined"
             fullWidth
@@ -107,8 +122,8 @@ function Login() {
               '& .MuiOutlinedInput-root': {
                 transition: 'all 0.3s ease-in-out',
                 borderRadius: '8px',
-                '& .MuiOutlinedInput-input': { color: '#000000ff' },
-                '& .MuiInputLabel-root': { color: '#000000ff' },
+                '& .MuiOutlinedInput-input': { color: '#333' },
+                '& .MuiInputLabel-root': { color: '#444' },
               },
               '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255, 255, 255, 0.3)' },
             }}
@@ -137,23 +152,31 @@ function Login() {
               variant="contained"
               color="secondary"
               fullWidth
-              sx={{ mt: 3, py: 1.5, fontSize: '1.3rem', backgroundColor: '#00695c', borderRadius: '8px' }}
+              sx={{ mt: 3, py: 1.5, fontSize: '1.1rem', backgroundColor: '#ff5722', borderRadius: '8px' }}
             >
-              Login
+              Sign Up
             </Button>
           </motion.div>
-        <Box sx={{ mt: 2, display: 'flex', justifyContent: 'space-between' }}>
-            <Link href="/frontend/signup" underline="hover" sx={{ color: '#fff', textDecorationColor: '#ff5722' }}>
-              Sign Up
-            </Link>
-            <Link href="/frontend/forgot-password" underline="hover" sx={{ color: '#fff', textDecorationColor: '#ff5722' }}>
-              Forgot Password
-            </Link>
-          </Box>
         </Box>
+        <StyledModal open={open} onClose={() => setOpen(false)}>
+          <Fade in={open}>
+            <Box
+              sx={{
+                background: 'rgba(0, 0, 0, 0.8)',
+                color: '#fff',
+                p: 4,
+                borderRadius: '16px',
+                textAlign: 'center',
+                maxWidth: '300px',
+              }}
+            >
+              <Typography variant="h5">Welcome Buddy, lets budget better together!</Typography>
+            </Box>
+          </Fade>
+        </StyledModal>
       </Box>
     </StyledContainer>
   );
 }
 
-export default Login;
+export default SignUp;
