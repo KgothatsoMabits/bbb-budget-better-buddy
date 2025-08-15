@@ -1,46 +1,53 @@
 const mongoose = require("mongoose");
 
-const GoalSchema= new mongoose.Schema({
-    title:{
-        type:String,
-        required:true,
-        minLength:3,
-        maxLength:50,
-        trim:true
+const GoalSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      minLength: 3,
+      maxLength: 50,
+      trim: true,
     },
-    description:{
-        type:String,
-        required:true,
-        minLength:3,
-        maxLength:250,
-        trim:true
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
-    item_price:{
-        type:Schema.Types.Decimal128,
-        required:true
+    description: {
+      type: String,
+      required: true,
+      minLength: 3,
+      maxLength: 250,
+      trim: true,
     },
-    income:{
-        type:Schema.Types.Decimal128,
-        required:true
+    item_price: {
+      type: mongoose.Schema.Types.Decimal128,
+      required: true,
     },
-    expenses:{
-        type:Schema.Types.Decimal128,
-        required:true
+    income: {
+      type: mongoose.Schema.Types.Decimal128,
+      required: true,
     },
-    recommendation:{
-        type:String
+    expenses: {
+      type: mongoose.Schema.Types.Decimal128,
+      required: true,
     },
-    startDate:{
-        type:Date,
-        required:true,
-        default: Date.now().toString()
+    recommendation: {
+      type: String,
+      requried:false,
     },
-    endDate:{
-        type:Date,
-        required:true,
-    }
+    startDate: {
+      type: Date,
+      required: true,
+      default: Date.now().toString(),
+    },
+    endDate: {
+      type: Date,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
-
-},{timestamps:true})
-
-module.exports = mongoose.model('Goals',GoalSchema)
+module.exports = mongoose.model("Goals", GoalSchema);
