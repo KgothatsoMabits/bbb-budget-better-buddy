@@ -35,19 +35,28 @@ const StyledModal = styled(Modal)(({ theme }) => ({
 
 function SignUp() {
   const [email, setEmail] = useState('');
+  const [cellphone, setCellphone] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Mock signup logic - replace with API call in backend
-    setOpen(true);
-    setTimeout(() => {
+    if (password !== confirmPassword) {
+      setError('Passwords do not match. Please try again');
       setOpen(false);
-      navigate('/');
-    }, 3000); // Redirect to dashboard after 3 seconds
+    } else {
+      setError('');
+      setOpen(true);
+      setTimeout(() => {
+        setOpen(false);
+        navigate('/');
+      }, 3000); // Redirect to dashboard after 3 seconds
+    }
   };
 
   return (
@@ -112,12 +121,46 @@ function SignUp() {
             }}
           />
           <TextField
+            label="Surname"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={surname}
+            onChange={(e) => setSurname(e.target.value)}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                transition: 'all 0.3s ease-in-out',
+                borderRadius: '8px',
+                '& .MuiOutlinedInput-input': { color: '#333' },
+                '& .MuiInputLabel-root': { color: '#444' },
+              },
+              '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255, 255, 255, 0.3)' },
+            }}
+          />
+          <TextField
             label="Email"
             variant="outlined"
             fullWidth
             margin="normal"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                transition: 'all 0.3s ease-in-out',
+                borderRadius: '8px',
+                '& .MuiOutlinedInput-input': { color: '#333' },
+                '& .MuiInputLabel-root': { color: '#444' },
+              },
+              '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255, 255, 255, 0.3)' },
+            }}
+          />
+          <TextField
+            label="Cellphone"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={cellphone}
+            onChange={(e) => setCellphone(e.target.value)}
             sx={{
               '& .MuiOutlinedInput-root': {
                 transition: 'all 0.3s ease-in-out',
@@ -146,6 +189,29 @@ function SignUp() {
               '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255, 255, 255, 0.3)' },
             }}
           />
+          <TextField
+            label="Confirm Password"
+            type="password"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                transition: 'all 0.3s ease-in-out',
+                borderRadius: '8px',
+                '& .MuiOutlinedInput-input': { color: '#333' },
+                '& .MuiInputLabel-root': { color: '#444' },
+              },
+              '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255, 255, 255, 0.3)' },
+            }}
+          />
+          {error && (
+            <Typography color="error" sx={{ mt: 1, textAlign: 'center' }}>
+              {error}
+            </Typography>
+          )}
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button
               type="submit"

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { Box, TextField, Button, Typography, Container } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -40,6 +40,14 @@ function Login() {
       setIsAuthenticated(true);
       navigate('/');
     }
+  };
+
+  const handleSignUpClick = () => {
+    navigate('/signup');
+  };
+
+  const handleForgotPasswordClick = () => {
+    navigate('/forgot-password');
   };
 
   return (
@@ -143,12 +151,28 @@ function Login() {
             </Button>
           </motion.div>
         <Box sx={{ mt: 2, display: 'flex', justifyContent: 'space-between' }}>
-            <Link href="/frontend/signup" underline="hover" sx={{ color: '#fff', textDecorationColor: '#ff5722' }}>
+            <Typography
+              onClick={handleSignUpClick}
+              sx={{
+                color: '#fff',
+                textDecoration: 'underline',
+                textDecorationColor: '#00695c',
+                '&:hover': { cursor: 'pointer', textDecorationColor: '#ff9800' },
+              }}
+            >
               Sign Up
-            </Link>
-            <Link href="/frontend/forgot-password" underline="hover" sx={{ color: '#fff', textDecorationColor: '#ff5722' }}>
+            </Typography>
+            <Typography
+              onClick={handleForgotPasswordClick}
+              sx={{
+                color: '#fff',
+                textDecoration: 'underline',
+                textDecorationColor: '#00695c',
+                '&:hover': { cursor: 'pointer', textDecorationColor: '#ff9800' },
+              }}
+            >
               Forgot Password
-            </Link>
+            </Typography>
           </Box>
         </Box>
       </Box>

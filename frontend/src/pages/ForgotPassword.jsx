@@ -54,7 +54,7 @@ function ForgotPassword() {
             gutterBottom
             sx={{ fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', marginBottom: '40px' }}
           >
-            Forgot Password
+            Forgot Password? No Problem!
           </Typography>
         </motion.div>
         <Typography color="white" sx={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)' }}>
